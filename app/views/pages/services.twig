@@ -1,0 +1,88 @@
+{% extends "layouts/layout.twig" %}
+
+{% block content %}
+<!-- ***** Hero Area Start ***** -->
+<div class="hero-area d-flex align-items-center">
+    <!-- Hero Thumbnail -->
+     <div class="hero-thumbnail equalize bg-img" style="background-image: url({{ data.servicesPage.heroImage.url }}?h=1100);"></div>
+    <!-- Hero Content -->
+    <div class="hero-content equalize">
+        <div class="container-fluid h-100">
+            <div class="row h-100 align-items-center justify-content-center">
+                <div class="col-12 col-md-8">
+                    <div class="line"></div>
+                    <h2>{{ data.servicesPage.title }}</h2>
+                    <p>{{ data.servicesPage.content }}</p>
+                    <a href="#" class="btn sonar-btn white-btn">contact me</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Hero Area End ***** -->
+
+<!-- ***** Services Area Start ***** -->
+<div class="sonar-services-area section-padding-100-50">
+  <div class="container">
+    <div class="row">
+      {% for service in data.services %}
+        <!-- Single Services Area -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="single-services-area wow fadeInUp" data-wow-delay="{{ cycle(["300", "500", "700"], loop.index0) }}ms">
+            <img src="{{ service.image.url }}" alt="">
+            <h4>{{ service.title }}</h4>
+            <p>{{ service.description }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<!-- ***** Services Area End ***** -->
+
+
+<div class="sonar-testimonials-area bg-img" style="background-image: url(img/bg-img/tes.jpg);">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-md-10 col-lg-7">
+        <div class="testimonial-content bg-white">
+          <div class="section-heading text-left">
+            <div class="line"></div>
+            <h2>Testimonials</h2>
+          </div>
+          <div class="testimonial-slides owl-carousel">
+            {% for testimonial in data.testimonials %}
+              <div class="single-tes-slide">
+                <p>{{ testimonial.content }}</p>
+                <h6>{{ testimonial.name }}</h6>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="cool-facts-area section-padding-100-0">
+  <div class="container">
+    <div class="row align-items-center">
+      {% for i, service in data.counters %}
+        <!-- Single Cool Fact-->
+        <div class="col-12 col-sm-6 col-lg-3">
+          <div class="single-cool-fact-area text-center mb-100 wow fadeInUpBig" data-wow-delay="{{(i + 1) * 250 }}ms">
+            <img src="{{ service.image.url }}" alt="">
+            <h2><span class="counter">{{ service.value }}</span></h2>
+            <p>{{ service.title }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% include "partials/cta.twig" with {"gray": true, site: data.generalInfo } %}
+{% include "partials/footer.twig" with {"gray": true, "dots": true, "dream": true} %}
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{{ gray ? true : false }}
+{{ dream ? true : false }}
+
+<div class="sonar-call-to-action-area {{ gray ? "bg-gray section-padding-100" : "section-padding-0-100" }}">
+  {% if dream %}
+    <div class="backEnd-content">
+      <h2>Dream</h2>
+    </div>
+  {% endif %}
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="call-to-action-content wow fadeInUp" data-wow-delay="0.5s">
+          <h2>{{ site.callToAction }}</h2>
+          <h5>Let’s talk</h5>
+          <a href="#" class="btn sonar-btn mt-100">contact me</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

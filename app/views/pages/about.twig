@@ -1,0 +1,101 @@
+{% extends "layouts/layout.twig" %}
+
+{% block content %}
+  <!-- ***** Hero Area Start ***** -->
+  <div class="hero-area d-flex align-items-center">
+
+    <!-- Back End Content -->
+    <div class="backEnd-content">
+      <img src="assets/images/dots.png" class="dots" />
+    </div>
+
+    <!-- Hero Thumbnail -->
+    <div class="hero-thumbnail aboutUs equalize bg-img" style="background-image: url({{ data.aboutPage.heroImage.url }}?h=1100);"></div>
+
+    <!-- Hero Content -->
+    <div class="hero-content aboutUs equalize">
+      <div class="container-fluid h-100">
+        <div class="row h-100 align-items-center justify-content-center">
+          <div class="col-12 col-md-10">
+            <div class="line"></div>
+            <h2>{{ data.aboutPage.title }}</h2>
+            <p>{{ data.aboutPage.content }}</p>
+            <a href="#" class="btn sonar-btn white-btn">contact me</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sonar-about-us-area bg-img" style="background-image: url({{ data.skillGroups[0].image.url }}?h=1280);">
+    <!-- Back End Content -->
+    <div class="backEnd-content">
+      <h2>Dream</h2>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 col-md-10 col-lg-7">
+          <div class="about-us-content bg-white">
+            <div class="section-heading text-left wow fadeInUp" data-wow-delay="300ms">
+              <div class="line"></div>
+              <h2>{{ data.skillGroups[0].title }}</h2>
+            </div>
+            <p class="wow fadeInUp" data-wow-delay="600ms">
+              {{ data.skillGroups[0].description }}
+            </p>
+            <!-- Progress Bar Content Area -->
+            <div class="services-progress-bar mt-50 wow fadeInUp" data-wow-delay="900ms">
+              {% for i, skill in data.skillGroups[0].skills %}
+                <!-- Single Progress Bar -->
+                <div class="single_progress_bar">
+                  <div id="bar{{  i + 1}}" class="barfiller">
+                    <div class="tipWrap">
+                      <span class="tip"></span>
+                    </div>
+                    <span class="fill" data-percentage="{{ skill.value }}"></span>
+                  </div>
+                  <p>{{ skill.name }}</p>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sonar-about-us-area second-part bg-img" style="background-image: url({{ data.skillGroups[1].image.url }}?h=1280);">
+    <!-- Back End Content -->
+    <div class="backEnd-content">
+      <h2>Really</h2>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row justify-content-end">
+        <div class="col-12 col-md-10 col-lg-7">
+          <div class="about-us-content bg-white">
+            <div class="section-heading text-left wow fadeInUp" data-wow-delay="300ms">
+              <div class="line"></div>
+              <h2>{{ data.skillGroups[1].title }}</h2>
+            </div>
+            <p class="wow fadeInUp" data-wow-delay="600ms">{{ data.skillGroups[1].description }}</p>
+            <div class="row mt-100 text-center wow fadeInUp" data-wow-delay="900ms">
+              {% for skill in data.skillGroups[1].skills %}
+                <div class="col-12 col-sm-6 col-md-4">
+                  <div class="single-pie-bar" data-percent="{{ skill.value }}">
+                    <canvas class="bar-circle" width="100" height="100"></canvas>
+                    <p>{{ skill.name }}</p>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include "partials/footer.twig" with {"gray": true, "dots": true} %}
+
+{% endblock %}

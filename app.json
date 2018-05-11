@@ -1,0 +1,11 @@
+{
+  "name": "DatoCMS PHP Demo",
+  "description": "A barebones PHP app that shows how to fetch content from DatoCMS",
+  "repository": "https://github.com/datocms/php-demo",
+  "logo": "https://www.datocms-assets.com/205/1517846522-logo-dato-512_preview-1.png?h=150&w=150",
+  "keywords": ["php", "datocms", "graphql"],
+  "env": {
+    "DATO_API_TOKEN": "XXX",
+    "PHP_ENVIRONMENT": "production"
+  }
+}

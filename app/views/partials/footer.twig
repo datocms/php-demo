@@ -1,0 +1,29 @@
+<footer class="footer-area {{ gray ? "bg-gray" : "" }}">
+  {% if gray or dots or dream %}
+    <!-- back end content -->
+    <div class="backEnd-content">
+      {% if dots %}
+        <img src="assets/images/dots.png" class="dots" />
+      {% endif %}
+      {% if dream %}
+        <h2>Dream</h2>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <!-- Copywrite Text -->
+        <div class="copywrite-text">
+          <p>
+            Copyright &copy; {{ "now"|date('Y', timezone="Europe/Paris") }} All rights reserved
+          </p>
+          <p>
+            This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
