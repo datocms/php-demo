@@ -15,7 +15,7 @@ function query($query) {
   $curl->setHeader('Content-Type', 'application/json');
   $curl->setHeader('Accept', 'application/json');
   $curl->setHeader('Authorization', 'Bearer '.getenv('DATO_API_TOKEN'));
-  $curl->post('https://site-api.datocms.com/graphql', array('query' => $query));
+  $curl->post('https://graphql.datocms.com/', array('query' => $query));
 
   return $curl->response->data;
 }
