@@ -1,0 +1,7 @@
+{
+  "name": "PHP DatoCMS blog",
+  "previewImage": "https://raw.githubusercontent.com/datocms/rails-demo/master/preview.png",
+  "templateId": "5546",
+  "deploymentType": "server",
+  "datocmsApiTokenEnvName": "DATO_API_TOKEN"
+ }
