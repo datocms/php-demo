@@ -1,7 +1,9 @@
 {
-  "name": "PHP DatoCMS blog",
-  "previewImage": "https://raw.githubusercontent.com/datocms/rails-demo/master/preview.png",
-  "templateId": "5546",
+  "name": "PHP Photography Website",
+  "description": "Simple demo of a photography website made with PHP, Twig templates and DatoCMS",
+  "previewImage": "https://www.datocms-assets.com/205/1585206062-screen-shot-2020-03-26-at-07-59-39-fullpage.png?crop=top&fit=crop&h=500&w=600&auto=format",
+  "datocmsProjectId": "5546",
   "deploymentType": "server",
-  "datocmsApiTokenEnvName": "DATO_API_TOKEN"
- }
+  "datocmsApiTokenEnvName": "DATO_API_TOKEN",
+  "livePreviewUrl": "https://datocms-sonar-demo.herokuapp.com/"
+}
