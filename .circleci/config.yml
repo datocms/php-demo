@@ -27,6 +27,8 @@ jobs:
 
       # Download and cache dependencies
       - restore_cache:
+      working_directory: web
+          cache-key: 'cache-{{ arch }}-{{ .Branch }}-{{ checksum "web/package.json" }}'
           keys:
             # "composer.lock" can be used if it is committed to the repo
             - v1-dependencies-{{ checksum "composer.json" }}
@@ -45,8 +47,6 @@ jobs:
             - node-v1-
       - run: yarn install
       - save_cache:
-      working_directory: web
-          cache-key: 'cache-{{ arch }}-{{ .Branch }}-{{ checksum "web/package.json" }}'
           key: node-v1-{{ checksum "package.json" }}
           paths:
             - node_modules
