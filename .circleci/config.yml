@@ -27,7 +27,7 @@ jobs:
 
       # Download and cache dependencies
       - restore_cache:
-      working_directory: web
+      
           cache-key: 'cache-{{ arch }}-{{ .Branch }}-{{ checksum "web/package.json" }}'
           keys:
             # "composer.lock" can be used if it is committed to the repo
