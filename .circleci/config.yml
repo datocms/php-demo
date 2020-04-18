@@ -31,23 +31,23 @@ jobs:
           
           keys:
             # "composer.lock" can be used if it is committed to the repo
-            - v1-dependencies-{{ arch }}-{{ .Branch }}-{{ checksum "web/package.json" }}
+            - v1-dependencies-{{ checksum "web/composer.json" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
       - run: composer install -n --prefer-dist
 
       - save_cache:
-          key: v1-dependencies-{{ arch }}-{{ .Branch }}-{{ checksum "web/package.json" }}
+          key: v1-dependencies-{{ checksum "web/composer.json" }}
           paths:
             - ./vendor
       - restore_cache:
           keys:
-            - node-v1-{{ arch }}-{{ .Branch }}-{{ checksum "web/package.json" }}
+            - node-v1-{{ checksum "web/composer.json" }}
             - node-v1-
       - run: yarn install
       - save_cache:
-          key: node-v1-{{ arch }}-{{ .Branch }}-{{ checksum "web/package.json" }}
+          key: {{ checksum "web/composer.json" }}
           paths:
             - node_modules
 
