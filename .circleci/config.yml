@@ -45,6 +45,8 @@ jobs:
             - node-v1-
       - run: yarn install
       - save_cache:
+      working_directory: web
+          cache-key: 'cache-{{ arch }}-{{ .Branch }}-{{ checksum "web/package.json" }}'
           key: node-v1-{{ checksum "package.json" }}
           paths:
             - node_modules
@@ -57,7 +59,6 @@ jobs:
       #- run: ./vendor/bin/phpunit
       - run: ./vendor/bin/codecept build
       - run: ./vendor/bin/codecept run
-       working_directory: web
-          cache-key: 'cache-{{ arch }}-{{ .Branch }}-{{ checksum "web/package.json" }}'
+       
       
     
