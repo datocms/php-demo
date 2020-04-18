@@ -20,6 +20,15 @@ jobs:
 
     steps:
       - checkout
+      - run:
+      name: Notify DatoCMS about the status of the job
+      command: 'curl -X POST --data-binary "{\"payload\": { \"branch\": \"$CIRCLE_BRANCH\", \"status\": \"failed\" } }" https://webhooks.datocms.com/fada902ca55c2a4ad010/deploy-results'
+      when: on_fail
+
+    - run:
+      name: Notify DatoCMS about the status of the job
+      command: 'curl -X POST --data-binary "{\"payload\": { \"branch\": \"$CIRCLE_BRANCH\", \"status\": \"success\" } }" https://webhooks.datocms.com/fada902ca55c2a4ad010/deploy-results'
+      when: on_success
 
       - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
       - run: sudo docker-php-ext-install zip
@@ -57,13 +66,5 @@ jobs:
       - run: ./vendor/bin/codecept build
       - run: ./vendor/bin/codecept run
       
-      - run:
-      name: Notify DatoCMS about the status of the job
-      command: 'curl -X POST --data-binary "{\"payload\": { \"branch\": \"$CIRCLE_BRANCH\", \"status\": \"failed\" } }" https://webhooks.datocms.com/fada902ca55c2a4ad010/deploy-results'
-      when: on_fail
-
-    - run:
-      name: Notify DatoCMS about the status of the job
-      command: 'curl -X POST --data-binary "{\"payload\": { \"branch\": \"$CIRCLE_BRANCH\", \"status\": \"success\" } }" https://webhooks.datocms.com/fada902ca55c2a4ad010/deploy-results'
-      when: on_success
+      
     
