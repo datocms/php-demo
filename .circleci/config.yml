@@ -20,15 +20,12 @@ jobs:
 
     steps:
       - checkout
-      
 
       - run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
       - run: sudo docker-php-ext-install zip
 
       # Download and cache dependencies
       - restore_cache:
-      
-          
           keys:
             # "composer.lock" can be used if it is committed to the repo
             - v1-dependencies-{{ checksum "composer.json" }}
@@ -43,11 +40,11 @@ jobs:
             - ./vendor
       - restore_cache:
           keys:
-            - node-v1-{{ checksum "composer.json" }}
+            - node-v1-{{ checksum "package.json" }}
             - node-v1-
       - run: yarn install
       - save_cache:
-          key: {{ checksum "composer.json" }}
+          key: node-v1-{{ checksum "package.json" }}
           paths:
             - node_modules
 
@@ -58,10 +55,4 @@ jobs:
       # run tests with phpunit or codecept
       #- run: ./vendor/bin/phpunit
       - run: ./vendor/bin/codecept build
-      - run: ./vendor/bin/codecept run
-       
-     
-    
-      
-    
-
+      - run: ./vendor/bin/codecept run 
