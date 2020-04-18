@@ -14,9 +14,9 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # Using the RAM variation mitigates I/O contention
       # for database intensive operations.
-      # - image: circleci/mysql:5.7-ram
+       - image: circleci/mysql:5.7-ram
       #
-      # - image: redis:2.8.19
+       - image: redis:2.8.19
 
     steps:
       - checkout
