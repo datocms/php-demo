@@ -1,11 +1,15 @@
 <?php
 
+use DI\Container;
+use Slim\Factory\AppFactory;
+use Slim\Views\Twig;
+use Slim\Views\TwigMiddleware;
+use Curl\Curl;
+
 require('../vendor/autoload.php');
 
-use \Curl\Curl;
-
-if (getenv('PHP_ENVIRONMENT') != 'production') {
-  $dotenv = new Dotenv\Dotenv(__DIR__);
+if ($_ENV['PHP_ENVIRONMENT'] != 'production') {
+  $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
   $dotenv->load();
 }
 
@@ -14,27 +18,27 @@ function query($query) {
 
   $curl->setHeader('Content-Type', 'application/json');
   $curl->setHeader('Accept', 'application/json');
-  $curl->setHeader('Authorization', 'Bearer '.getenv('DATO_API_TOKEN'));
+  $curl->setHeader('Authorization', 'Bearer '.$_ENV['DATO_API_TOKEN']);
   $curl->post('https://graphql.datocms.com/', array('query' => $query));
 
   return $curl->response->data;
 }
 
-$app = new Slim\App();
-$container = $app->getContainer();
+$container = new Container();
+AppFactory::setContainer($container);
 
-$container['view'] = function ($container) {
-  $view = new \Slim\Views\Twig(__DIR__.'/views/', [ 'cache' => false ]);
-  $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
-  $view->addExtension(new Slim\Views\TwigExtension($container['router'], $basePath));
-  return $view;
-};
+$container->set('view', function () {
+  return Twig::create(__DIR__.'/views/', ['cache' => false]);
+});
+
+$app = AppFactory::create();
+$app->add(TwigMiddleware::createFromContainer($app));
 
 $app->get('/', function ($request, $response, $args) {
-  return $this->view->render($response, 'pages/homepage.twig', [
+  return $this->get('view')->render($response, 'pages/homepage.twig', [
     'data' => query('
       {
-        generalInfo: generalInfo {
+        generalInfo {
           siteName
           callToAction
           socialProfiles {
@@ -63,10 +67,10 @@ $app->get('/', function ($request, $response, $args) {
 });
 
 $app->get('/about', function ($request, $response, $args) {
-  return $this->view->render($response, 'pages/about.twig', [
+  return $this->get('view')->render($response, 'pages/about.twig', [
     'data' => query('
       {
-        generalInfo: generalInfo {
+        generalInfo {
           siteName
           callToAction
           socialProfiles {
@@ -94,10 +98,10 @@ $app->get('/about', function ($request, $response, $args) {
 });
 
 $app->get('/services', function ($request, $response, $args) {
-  return $this->view->render($response, 'pages/services.twig', [
+  return $this->get('view')->render($response, 'pages/services.twig', [
     'data' => query('
       {
-        generalInfo: generalInfo {
+        generalInfo {
           siteName
           callToAction
           socialProfiles {
@@ -130,10 +134,10 @@ $app->get('/services', function ($request, $response, $args) {
 });
 
 $app->get('/portfolio', function ($request, $response, $args) {
-  return $this->view->render($response, 'pages/portfolio.twig', [
+  return $this->get('view')->render($response, 'pages/portfolio.twig', [
     'data' => query('
       {
-        generalInfo: generalInfo {
+        generalInfo {
           siteName
           callToAction
           socialProfiles {
@@ -162,10 +166,10 @@ $app->get('/portfolio', function ($request, $response, $args) {
 });
 
 $app->get('/contact', function ($request, $response, $args) {
-  return $this->view->render($response, 'pages/contact.twig', [
+  return $this->get('view')->render($response, 'pages/contact.twig', [
     'data' => query('
       {
-        generalInfo: generalInfo {
+        generalInfo {
           siteName
           callToAction
           socialProfiles {
